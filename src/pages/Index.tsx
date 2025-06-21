@@ -26,31 +26,31 @@ const Index = () => {
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-indigo-50">
       {/* Header */}
       <div className="border-b border-gray-200 bg-white/80 backdrop-blur-sm">
-        <div className="container mx-auto px-6 py-4">
-          <div className="flex items-center justify-between">
+        <div className="container mx-auto px-4 sm:px-6 py-4">
+          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
             <div className="flex items-center space-x-4">
               <div className="h-8 w-8 rounded-lg bg-gradient-to-r from-blue-500 to-purple-600 flex items-center justify-center">
                 <div className="h-4 w-4 rounded-sm bg-white"></div>
               </div>
               <div>
-                <h1 className="text-2xl font-bold text-gray-900">Analytics Dashboard</h1>
-                <p className="text-sm text-gray-600">Monitor your website performance in real-time</p>
+                <h1 className="text-xl sm:text-2xl font-bold text-gray-900">Analytics Dashboard</h1>
+                <p className="text-sm text-gray-600 hidden sm:block">Monitor your website performance in real-time</p>
               </div>
             </div>
             
             {/* Filter and Date Controls */}
-            <div className="flex items-center space-x-3">
+            <div className="flex flex-wrap items-center gap-2 sm:gap-3 w-full sm:w-auto">
               <Button 
                 variant="outline" 
                 size="sm" 
-                className="border-blue-300 text-blue-700 hover:bg-blue-50 bg-blue-50/50"
+                className="border-blue-300 text-blue-700 hover:bg-blue-50 bg-blue-50/50 flex-1 sm:flex-none"
               >
                 <Filter className="h-4 w-4 mr-2" />
-                Filter
+                <span className="hidden sm:inline">Filter</span>
               </Button>
               
               <Select value={dateRange} onValueChange={setDateRange}>
-                <SelectTrigger className="w-[160px] border-gray-300">
+                <SelectTrigger className="w-full sm:w-[160px] border-gray-300">
                   <SelectValue />
                 </SelectTrigger>
                 <SelectContent className="bg-white border border-gray-200 shadow-lg">
@@ -63,82 +63,87 @@ const Index = () => {
                 </SelectContent>
               </Select>
 
-              <Popover>
-                <PopoverTrigger asChild>
-                  <Button
-                    variant="outline"
-                    size="sm"
-                    className={cn(
-                      "border-gray-300 text-gray-700 hover:text-gray-900",
-                      !date && "text-muted-foreground"
-                    )}
-                  >
-                    <CalendarIcon className="h-4 w-4 mr-2" />
-                    {date ? format(date, "MMM dd, yyyy") : "Select date"}
-                  </Button>
-                </PopoverTrigger>
-                <PopoverContent className="w-auto p-0 bg-white border border-gray-200 shadow-lg" align="start">
-                  <Calendar
-                    mode="single"
-                    selected={date}
-                    onSelect={setDate}
-                    initialFocus
-                    className={cn("p-3 pointer-events-auto")}
-                  />
-                </PopoverContent>
-              </Popover>
-              
-              <Button variant="outline" size="sm" className="border-gray-300 text-gray-700 hover:text-gray-900">
-                <RefreshCw className="h-4 w-4 mr-2" />
-                Refresh
-              </Button>
-              <Button variant="outline" size="sm" className="border-gray-300 text-gray-700 hover:text-gray-900">
-                <Download className="h-4 w-4 mr-2" />
-                Export
-              </Button>
-              <Button variant="outline" size="sm" className="border-gray-300 text-gray-700 hover:text-gray-900">
-                <Settings className="h-4 w-4" />
-              </Button>
+              <div className="flex items-center gap-2 sm:gap-3">
+                <Popover>
+                  <PopoverTrigger asChild>
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      className={cn(
+                        "border-gray-300 text-gray-700 hover:text-gray-900",
+                        !date && "text-muted-foreground"
+                      )}
+                    >
+                      <CalendarIcon className="h-4 w-4 mr-2" />
+                      <span className="hidden sm:inline">
+                        {date ? format(date, "MMM dd, yyyy") : "Select date"}
+                      </span>
+                      <span className="sm:hidden">Date</span>
+                    </Button>
+                  </PopoverTrigger>
+                  <PopoverContent className="w-auto p-0 bg-white border border-gray-200 shadow-lg" align="start">
+                    <Calendar
+                      mode="single"
+                      selected={date}
+                      onSelect={setDate}
+                      initialFocus
+                      className={cn("p-3 pointer-events-auto")}
+                    />
+                  </PopoverContent>
+                </Popover>
+                
+                <Button variant="outline" size="sm" className="border-gray-300 text-gray-700 hover:text-gray-900">
+                  <RefreshCw className="h-4 w-4 mr-2" />
+                  <span className="hidden sm:inline">Refresh</span>
+                </Button>
+                <Button variant="outline" size="sm" className="border-gray-300 text-gray-700 hover:text-gray-900">
+                  <Download className="h-4 w-4 mr-2" />
+                  <span className="hidden sm:inline">Export</span>
+                </Button>
+                <Button variant="outline" size="sm" className="border-gray-300 text-gray-700 hover:text-gray-900">
+                  <Settings className="h-4 w-4" />
+                </Button>
+              </div>
             </div>
           </div>
         </div>
       </div>
 
       {/* Main Content */}
-      <div className="container mx-auto px-6 py-8">
+      <div className="container mx-auto px-4 sm:px-6 py-6 sm:py-8">
         {/* Real-time Status */}
-        <div className="mb-8">
+        <div className="mb-6 sm:mb-8">
           <RealtimeUsers />
         </div>
 
         {/* Overview Metrics */}
-        <div className="mb-8">
+        <div className="mb-6 sm:mb-8">
           <OverviewMetrics />
         </div>
 
         {/* Main Dashboard Tabs */}
-        <Tabs defaultValue="overview" className="space-y-6">
-          <TabsList className="grid w-full grid-cols-4 lg:w-auto lg:grid-cols-4 bg-gray-100 border-gray-200">
-            <TabsTrigger value="overview" className="data-[state=active]:bg-blue-600 data-[state=active]:text-white">
+        <Tabs defaultValue="overview" className="space-y-4 sm:space-y-6">
+          <TabsList className="grid w-full grid-cols-2 sm:grid-cols-4 lg:w-auto lg:grid-cols-4 bg-gray-100 border-gray-200">
+            <TabsTrigger value="overview" className="data-[state=active]:bg-blue-600 data-[state=active]:text-white text-xs sm:text-sm">
               Overview
             </TabsTrigger>
-            <TabsTrigger value="traffic" className="data-[state=active]:bg-blue-600 data-[state=active]:text-white">
-              Traffic Analysis
+            <TabsTrigger value="traffic" className="data-[state=active]:bg-blue-600 data-[state=active]:text-white text-xs sm:text-sm">
+              Traffic
             </TabsTrigger>
-            <TabsTrigger value="behavior" className="data-[state=active]:bg-blue-600 data-[state=active]:text-white">
-              User Behavior
+            <TabsTrigger value="behavior" className="data-[state=active]:bg-blue-600 data-[state=active]:text-white text-xs sm:text-sm">
+              Behavior
             </TabsTrigger>
-            <TabsTrigger value="conversions" className="data-[state=active]:bg-blue-600 data-[state=active]:text-white">
+            <TabsTrigger value="conversions" className="data-[state=active]:bg-blue-600 data-[state=active]:text-white text-xs sm:text-sm">
               Conversions
             </TabsTrigger>
           </TabsList>
 
-          <TabsContent value="overview" className="space-y-6">
-            <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-              <div className="lg:col-span-2">
+          <TabsContent value="overview" className="space-y-4 sm:space-y-6">
+            <div className="grid grid-cols-1 xl:grid-cols-3 gap-4 sm:gap-6">
+              <div className="xl:col-span-2">
                 <TrafficChart />
               </div>
-              <div className="space-y-6">
+              <div className="space-y-4 sm:space-y-6">
                 <DeviceBreakdown />
                 <TopPages />
               </div>
@@ -146,27 +151,27 @@ const Index = () => {
             <GeographicData />
           </TabsContent>
 
-          <TabsContent value="traffic" className="space-y-6">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+          <TabsContent value="traffic" className="space-y-4 sm:space-y-6">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6">
               <TrafficChart />
               <GeographicData />
             </div>
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6">
               <DeviceBreakdown />
               <TopPages />
             </div>
           </TabsContent>
 
-          <TabsContent value="behavior" className="space-y-6">
-            <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-              <div className="lg:col-span-2">
+          <TabsContent value="behavior" className="space-y-4 sm:space-y-6">
+            <div className="grid grid-cols-1 xl:grid-cols-3 gap-4 sm:gap-6">
+              <div className="xl:col-span-2">
                 <TopPages />
               </div>
               <DeviceBreakdown />
             </div>
           </TabsContent>
 
-          <TabsContent value="conversions" className="space-y-6">
+          <TabsContent value="conversions" className="space-y-4 sm:space-y-6">
             <ConversionFunnel />
           </TabsContent>
         </Tabs>
