@@ -3,6 +3,9 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Calendar } from "@/components/ui/calendar";
+import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { OverviewMetrics } from "@/components/dashboard/OverviewMetrics";
 import { TrafficChart } from "@/components/dashboard/TrafficChart";
 import { GeographicData } from "@/components/dashboard/GeographicData";
@@ -10,9 +13,15 @@ import { TopPages } from "@/components/dashboard/TopPages";
 import { DeviceBreakdown } from "@/components/dashboard/DeviceBreakdown";
 import { RealtimeUsers } from "@/components/dashboard/RealtimeUsers";
 import { ConversionFunnel } from "@/components/dashboard/ConversionFunnel";
-import { Settings, Download, RefreshCw } from "lucide-react";
+import { Settings, Download, RefreshCw, Filter, CalendarIcon, ChevronDown } from "lucide-react";
+import { useState } from "react";
+import { format } from "date-fns";
+import { cn } from "@/lib/utils";
 
 const Index = () => {
+  const [dateRange, setDateRange] = useState("Last 28 days");
+  const [date, setDate] = useState<Date>();
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-indigo-50">
       {/* Header */}
@@ -28,7 +37,57 @@ const Index = () => {
                 <p className="text-sm text-gray-600">Monitor your website performance in real-time</p>
               </div>
             </div>
+            
+            {/* Filter and Date Controls */}
             <div className="flex items-center space-x-3">
+              <Button 
+                variant="outline" 
+                size="sm" 
+                className="border-blue-300 text-blue-700 hover:bg-blue-50 bg-blue-50/50"
+              >
+                <Filter className="h-4 w-4 mr-2" />
+                Filter
+              </Button>
+              
+              <Select value={dateRange} onValueChange={setDateRange}>
+                <SelectTrigger className="w-[160px] border-gray-300">
+                  <SelectValue />
+                </SelectTrigger>
+                <SelectContent className="bg-white border border-gray-200 shadow-lg">
+                  <SelectItem value="Last 7 days">Last 7 days</SelectItem>
+                  <SelectItem value="Last 28 days">Last 28 days</SelectItem>
+                  <SelectItem value="Last 3 months">Last 3 months</SelectItem>
+                  <SelectItem value="Last 6 months">Last 6 months</SelectItem>
+                  <SelectItem value="Last year">Last year</SelectItem>
+                  <SelectItem value="Custom range">Custom range</SelectItem>
+                </SelectContent>
+              </Select>
+
+              <Popover>
+                <PopoverTrigger asChild>
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    className={cn(
+                      "border-gray-300 text-gray-700 hover:text-gray-900",
+                      !date && "text-muted-foreground"
+                    )}
+                  >
+                    <CalendarIcon className="h-4 w-4 mr-2" />
+                    {date ? format(date, "MMM dd, yyyy") : "Select date"}
+                  </Button>
+                </PopoverTrigger>
+                <PopoverContent className="w-auto p-0 bg-white border border-gray-200 shadow-lg" align="start">
+                  <Calendar
+                    mode="single"
+                    selected={date}
+                    onSelect={setDate}
+                    initialFocus
+                    className={cn("p-3 pointer-events-auto")}
+                  />
+                </PopoverContent>
+              </Popover>
+              
               <Button variant="outline" size="sm" className="border-gray-300 text-gray-700 hover:text-gray-900">
                 <RefreshCw className="h-4 w-4 mr-2" />
                 Refresh
