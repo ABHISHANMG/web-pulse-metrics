@@ -1,11 +1,116 @@
-// Update this page (the content is just a fallback if you fail to update the page)
+
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import { OverviewMetrics } from "@/components/dashboard/OverviewMetrics";
+import { TrafficChart } from "@/components/dashboard/TrafficChart";
+import { GeographicData } from "@/components/dashboard/GeographicData";
+import { TopPages } from "@/components/dashboard/TopPages";
+import { DeviceBreakdown } from "@/components/dashboard/DeviceBreakdown";
+import { RealtimeUsers } from "@/components/dashboard/RealtimeUsers";
+import { ConversionFunnel } from "@/components/dashboard/ConversionFunnel";
+import { Settings, Download, RefreshCw } from "lucide-react";
 
 const Index = () => {
   return (
-    <div className="min-h-screen flex items-center justify-center bg-background">
-      <div className="text-center">
-        <h1 className="text-4xl font-bold mb-4">Welcome to Your Blank App</h1>
-        <p className="text-xl text-muted-foreground">Start building your amazing project here!</p>
+    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-gray-900 to-slate-800">
+      {/* Header */}
+      <div className="border-b border-gray-800 bg-gray-900/50 backdrop-blur-sm">
+        <div className="container mx-auto px-6 py-4">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center space-x-4">
+              <div className="h-8 w-8 rounded-lg bg-gradient-to-r from-blue-500 to-purple-600 flex items-center justify-center">
+                <div className="h-4 w-4 rounded-sm bg-white"></div>
+              </div>
+              <div>
+                <h1 className="text-2xl font-bold text-white">Analytics Dashboard</h1>
+                <p className="text-sm text-gray-400">Monitor your website performance in real-time</p>
+              </div>
+            </div>
+            <div className="flex items-center space-x-3">
+              <Button variant="outline" size="sm" className="border-gray-700 text-gray-300 hover:text-white">
+                <RefreshCw className="h-4 w-4 mr-2" />
+                Refresh
+              </Button>
+              <Button variant="outline" size="sm" className="border-gray-700 text-gray-300 hover:text-white">
+                <Download className="h-4 w-4 mr-2" />
+                Export
+              </Button>
+              <Button variant="outline" size="sm" className="border-gray-700 text-gray-300 hover:text-white">
+                <Settings className="h-4 w-4" />
+              </Button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Main Content */}
+      <div className="container mx-auto px-6 py-8">
+        {/* Real-time Status */}
+        <div className="mb-8">
+          <RealtimeUsers />
+        </div>
+
+        {/* Overview Metrics */}
+        <div className="mb-8">
+          <OverviewMetrics />
+        </div>
+
+        {/* Main Dashboard Tabs */}
+        <Tabs defaultValue="overview" className="space-y-6">
+          <TabsList className="grid w-full grid-cols-4 lg:w-auto lg:grid-cols-4 bg-gray-800 border-gray-700">
+            <TabsTrigger value="overview" className="data-[state=active]:bg-blue-600">
+              Overview
+            </TabsTrigger>
+            <TabsTrigger value="traffic" className="data-[state=active]:bg-blue-600">
+              Traffic Analysis
+            </TabsTrigger>
+            <TabsTrigger value="behavior" className="data-[state=active]:bg-blue-600">
+              User Behavior
+            </TabsTrigger>
+            <TabsTrigger value="conversions" className="data-[state=active]:bg-blue-600">
+              Conversions
+            </TabsTrigger>
+          </TabsList>
+
+          <TabsContent value="overview" className="space-y-6">
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+              <div className="lg:col-span-2">
+                <TrafficChart />
+              </div>
+              <div className="space-y-6">
+                <DeviceBreakdown />
+                <TopPages />
+              </div>
+            </div>
+            <GeographicData />
+          </TabsContent>
+
+          <TabsContent value="traffic" className="space-y-6">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+              <TrafficChart />
+              <GeographicData />
+            </div>
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+              <DeviceBreakdown />
+              <TopPages />
+            </div>
+          </TabsContent>
+
+          <TabsContent value="behavior" className="space-y-6">
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+              <div className="lg:col-span-2">
+                <TopPages />
+              </div>
+              <DeviceBreakdown />
+            </div>
+          </TabsContent>
+
+          <TabsContent value="conversions" className="space-y-6">
+            <ConversionFunnel />
+          </TabsContent>
+        </Tabs>
       </div>
     </div>
   );
