@@ -46,18 +46,18 @@ export const OverviewMetrics = () => {
         const isPositive = metric.trend === "up" ? metric.change.startsWith("+") : metric.change.startsWith("-");
         
         return (
-          <Card key={index} className="bg-gray-800/50 border-gray-700 backdrop-blur-sm hover:bg-gray-800/70 transition-all duration-300">
+          <Card key={index} className="bg-white border-gray-200 hover:bg-gray-50 transition-all duration-300 shadow-sm">
             <CardHeader className="pb-3">
               <div className="flex items-center justify-between">
-                <CardTitle className="text-sm font-medium text-gray-300">
+                <CardTitle className="text-sm font-medium text-gray-600">
                   {metric.title}
                 </CardTitle>
-                <Icon className="h-4 w-4 text-gray-400" />
+                <Icon className="h-4 w-4 text-gray-500" />
               </div>
             </CardHeader>
             <CardContent>
               <div className="space-y-2">
-                <div className="text-2xl font-bold text-white">
+                <div className="text-2xl font-bold text-gray-900">
                   {metric.value}
                 </div>
                 <div className="flex items-center space-x-2">
@@ -65,8 +65,8 @@ export const OverviewMetrics = () => {
                     variant={isPositive ? "default" : "destructive"}
                     className={`text-xs ${
                       isPositive 
-                        ? "bg-green-500/20 text-green-400 border-green-500/30" 
-                        : "bg-red-500/20 text-red-400 border-red-500/30"
+                        ? "bg-green-100 text-green-700 border-green-200 hover:bg-green-100" 
+                        : "bg-red-100 text-red-700 border-red-200 hover:bg-red-100"
                     }`}
                   >
                     {isPositive ? (
@@ -76,7 +76,7 @@ export const OverviewMetrics = () => {
                     )}
                     {metric.change}
                   </Badge>
-                  <span className="text-xs text-gray-400">{metric.description}</span>
+                  <span className="text-xs text-gray-500">{metric.description}</span>
                 </div>
               </div>
             </CardContent>

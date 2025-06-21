@@ -14,10 +14,10 @@ const data = [
 
 export const TrafficChart = () => {
   return (
-    <Card className="bg-gray-800/50 border-gray-700 backdrop-blur-sm">
+    <Card className="bg-white border-gray-200 shadow-sm">
       <CardHeader>
-        <CardTitle className="text-white">Traffic Overview</CardTitle>
-        <CardDescription className="text-gray-400">
+        <CardTitle className="text-gray-900">Traffic Overview</CardTitle>
+        <CardDescription className="text-gray-600">
           Visitor trends over the last 7 months
         </CardDescription>
       </CardHeader>
@@ -35,22 +35,23 @@ export const TrafficChart = () => {
                   <stop offset="95%" stopColor="#10B981" stopOpacity={0.1}/>
                 </linearGradient>
               </defs>
-              <CartesianGrid strokeDasharray="3 3" stroke="#374151" />
+              <CartesianGrid strokeDasharray="3 3" stroke="#E5E7EB" />
               <XAxis 
                 dataKey="name" 
-                stroke="#9CA3AF"
+                stroke="#6B7280"
                 fontSize={12}
               />
               <YAxis 
-                stroke="#9CA3AF"
+                stroke="#6B7280"
                 fontSize={12}
               />
               <Tooltip 
                 contentStyle={{
-                  backgroundColor: '#1F2937',
-                  border: '1px solid #374151',
+                  backgroundColor: '#FFFFFF',
+                  border: '1px solid #E5E7EB',
                   borderRadius: '8px',
-                  color: '#F9FAFB'
+                  color: '#111827',
+                  boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)'
                 }}
               />
               <Area

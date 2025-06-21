@@ -11,10 +11,10 @@ const deviceData = [
 
 export const DeviceBreakdown = () => {
   return (
-    <Card className="bg-gray-800/50 border-gray-700 backdrop-blur-sm">
+    <Card className="bg-white border-gray-200 shadow-sm">
       <CardHeader>
-        <CardTitle className="text-white">Device Breakdown</CardTitle>
-        <CardDescription className="text-gray-400">
+        <CardTitle className="text-gray-900">Device Breakdown</CardTitle>
+        <CardDescription className="text-gray-600">
           Traffic by device type
         </CardDescription>
       </CardHeader>
@@ -37,10 +37,11 @@ export const DeviceBreakdown = () => {
               </Pie>
               <Tooltip 
                 contentStyle={{
-                  backgroundColor: '#1F2937',
-                  border: '1px solid #374151',
+                  backgroundColor: '#FFFFFF',
+                  border: '1px solid #E5E7EB',
                   borderRadius: '8px',
-                  color: '#F9FAFB'
+                  color: '#111827',
+                  boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)'
                 }}
               />
             </PieChart>
@@ -56,10 +57,10 @@ export const DeviceBreakdown = () => {
                     className="w-3 h-3 rounded-sm"
                     style={{ backgroundColor: device.color }}
                   ></div>
-                  <Icon className="h-4 w-4 text-gray-400" />
-                  <span className="text-sm text-gray-300">{device.name}</span>
+                  <Icon className="h-4 w-4 text-gray-500" />
+                  <span className="text-sm text-gray-700">{device.name}</span>
                 </div>
-                <span className="text-sm font-medium text-white">{device.value}%</span>
+                <span className="text-sm font-medium text-gray-900">{device.value}%</span>
               </div>
             );
           })}

@@ -14,9 +14,9 @@ import { Settings, Download, RefreshCw } from "lucide-react";
 
 const Index = () => {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-gray-900 to-slate-800">
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-indigo-50">
       {/* Header */}
-      <div className="border-b border-gray-800 bg-gray-900/50 backdrop-blur-sm">
+      <div className="border-b border-gray-200 bg-white/80 backdrop-blur-sm">
         <div className="container mx-auto px-6 py-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-4">
@@ -24,20 +24,20 @@ const Index = () => {
                 <div className="h-4 w-4 rounded-sm bg-white"></div>
               </div>
               <div>
-                <h1 className="text-2xl font-bold text-white">Analytics Dashboard</h1>
-                <p className="text-sm text-gray-400">Monitor your website performance in real-time</p>
+                <h1 className="text-2xl font-bold text-gray-900">Analytics Dashboard</h1>
+                <p className="text-sm text-gray-600">Monitor your website performance in real-time</p>
               </div>
             </div>
             <div className="flex items-center space-x-3">
-              <Button variant="outline" size="sm" className="border-gray-700 text-gray-300 hover:text-white">
+              <Button variant="outline" size="sm" className="border-gray-300 text-gray-700 hover:text-gray-900">
                 <RefreshCw className="h-4 w-4 mr-2" />
                 Refresh
               </Button>
-              <Button variant="outline" size="sm" className="border-gray-700 text-gray-300 hover:text-white">
+              <Button variant="outline" size="sm" className="border-gray-300 text-gray-700 hover:text-gray-900">
                 <Download className="h-4 w-4 mr-2" />
                 Export
               </Button>
-              <Button variant="outline" size="sm" className="border-gray-700 text-gray-300 hover:text-white">
+              <Button variant="outline" size="sm" className="border-gray-300 text-gray-700 hover:text-gray-900">
                 <Settings className="h-4 w-4" />
               </Button>
             </div>
@@ -59,17 +59,17 @@ const Index = () => {
 
         {/* Main Dashboard Tabs */}
         <Tabs defaultValue="overview" className="space-y-6">
-          <TabsList className="grid w-full grid-cols-4 lg:w-auto lg:grid-cols-4 bg-gray-800 border-gray-700">
-            <TabsTrigger value="overview" className="data-[state=active]:bg-blue-600">
+          <TabsList className="grid w-full grid-cols-4 lg:w-auto lg:grid-cols-4 bg-gray-100 border-gray-200">
+            <TabsTrigger value="overview" className="data-[state=active]:bg-blue-600 data-[state=active]:text-white">
               Overview
             </TabsTrigger>
-            <TabsTrigger value="traffic" className="data-[state=active]:bg-blue-600">
+            <TabsTrigger value="traffic" className="data-[state=active]:bg-blue-600 data-[state=active]:text-white">
               Traffic Analysis
             </TabsTrigger>
-            <TabsTrigger value="behavior" className="data-[state=active]:bg-blue-600">
+            <TabsTrigger value="behavior" className="data-[state=active]:bg-blue-600 data-[state=active]:text-white">
               User Behavior
             </TabsTrigger>
-            <TabsTrigger value="conversions" className="data-[state=active]:bg-blue-600">
+            <TabsTrigger value="conversions" className="data-[state=active]:bg-blue-600 data-[state=active]:text-white">
               Conversions
             </TabsTrigger>
           </TabsList>

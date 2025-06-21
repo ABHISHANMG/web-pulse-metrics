@@ -13,10 +13,10 @@ const countryData = [
 
 export const GeographicData = () => {
   return (
-    <Card className="bg-gray-800/50 border-gray-700 backdrop-blur-sm">
+    <Card className="bg-white border-gray-200 shadow-sm">
       <CardHeader>
-        <CardTitle className="text-white">Geographic Distribution</CardTitle>
-        <CardDescription className="text-gray-400">
+        <CardTitle className="text-gray-900">Geographic Distribution</CardTitle>
+        <CardDescription className="text-gray-600">
           Visitors by country
         </CardDescription>
       </CardHeader>
@@ -25,18 +25,15 @@ export const GeographicData = () => {
           {countryData.map((item, index) => (
             <div key={index} className="space-y-2">
               <div className="flex items-center justify-between">
-                <span className="text-sm font-medium text-gray-300">{item.country}</span>
+                <span className="text-sm font-medium text-gray-700">{item.country}</span>
                 <div className="flex items-center space-x-2">
-                  <span className="text-sm text-gray-400">{item.visitors.toLocaleString()}</span>
+                  <span className="text-sm text-gray-600">{item.visitors.toLocaleString()}</span>
                   <span className="text-xs text-gray-500">({item.percentage}%)</span>
                 </div>
               </div>
               <Progress 
                 value={item.percentage} 
-                className="h-2 bg-gray-700"
-                style={{
-                  background: `linear-gradient(to right, #3B82F6 0%, #3B82F6 ${item.percentage}%, #374151 ${item.percentage}%, #374151 100%)`
-                }}
+                className="h-2 bg-gray-200"
               />
             </div>
           ))}
